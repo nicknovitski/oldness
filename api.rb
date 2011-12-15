@@ -27,6 +27,10 @@ helpers do
   end
 end
 
+get '/api/range/:year' do
+  oldness_ranges(date_from(params)).to_json
+end
+
 get '/api/:medium' do
   oldness_ranges(date_of_first_work(params[:medium])).to_json
 end
