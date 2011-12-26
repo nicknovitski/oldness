@@ -16,7 +16,7 @@ describe "'oldness' command" do
         `./oldness rating literature -100-12-25`.should == "*****"
       end
       it "can rate a work of philosophy or religion" do
-        `#{command} #{sub_command} philosophy 1700`.should == '****'
+        `#{command} #{sub_command} philosophy 1700`.should == '***'
         `#{command} #{sub_command} religion 1911`.should == '**'
       end
       it "knows the ranges for novels and books"

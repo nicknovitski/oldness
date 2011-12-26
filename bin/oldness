@@ -6,22 +6,33 @@ require 'date'
 require 'oldness'
 
 #subcommand =  ARGV[0]
+
+### parse date object from final argument
+
 date_info = ARGV[2].split("-")
+
 if date_info[0] == ''
   date_info.shift
   date_info[0] = '-' + date_info[0]
 end
-date_info.map! {|v| v.to_i}
 
-print '*' * oldness_rating(Date.new(*date_info), Date.new(-1300))
+date_of_work_to_rate = Date.new(*date_info.map {|v| v.to_i})
 
-#case ARGV[1]
-#  when 'literature'
-#  else
-    #parse date
-#end
+### parse date object from second argument
 
+date_of_first_work = case ARGV[1]
+                       when 'novel', 'book' then Date.new(1010) # Tale of Genji
+                       when 'film', 'movie' then Date.new(1894, 2, 5) # Jean Le Roy's "marvellous cinematograph"
+                       when 'comic', 'manga' then Date.new(1837) # Histoire de M. Vieux Bois
+                       when 'videogame' then Date.new(1951, 5, 4) # NIMROD
+                       when 'history' then Date.new(-411) # end of Thucydides' history
+                       when 'literature' then Date.new(-1300) # Epic of Gilgamesh
+                       when 'philosophy', 'religion' then Date.new(-800) # The Upanishads
+                       when 'animation', 'cartoon', 'anime'  then Date.new(1906, 4, 6) #Humorous Phases of Funny Faces
+                       else raise Exception
+                     end
 
+print '*' * oldness_rating(date_of_work_to_rate, date_of_first_work)
 
 # todo: detect pluralization?
 
