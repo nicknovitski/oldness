@@ -1,5 +1,5 @@
 require 'rspec'
-require_relative 'oldness'
+require_relative 'lib/oldness'
 require 'date'
 
 describe "::rating" do

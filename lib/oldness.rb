@@ -1,5 +1,6 @@
 require 'date'
 
+
 def oldness_rating(work_date, start_date)
   current_date=Date.today
   raise ArgumentError if work_date > current_date or work_date < start_date

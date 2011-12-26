@@ -1,0 +1,28 @@
+#!/usr/bin/env ruby
+
+$LOAD_PATH.unshift(File.expand_path(File.dirname(__FILE__)) + '/../lib/')
+
+require 'date'
+require 'oldness'
+
+#subcommand =  ARGV[0]
+date_info = ARGV[2].split("-")
+if date_info[0] == ''
+  date_info.shift
+  date_info[0] = '-' + date_info[0]
+end
+date_info.map! {|v| v.to_i}
+
+print '*' * oldness_rating(Date.new(*date_info), Date.new(-1300))
+
+#case ARGV[1]
+#  when 'literature'
+#  else
+    #parse date
+#end
+
+
+
+# todo: detect pluralization?
+
+
