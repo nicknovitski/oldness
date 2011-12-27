@@ -13,8 +13,7 @@ describe "'oldness' command" do
     context "followed by a medium name and a date" do
       it "can rate a work of literature" do
         cli_rating('literature 2001').should == "*\n"
-        cli_rating('literature 1889-4').should == "***\n"
-        cli_rating('literature 1889-4-26').should == "**\n"
+        cli_rating('literature 1889-4-26').should == "***\n"
         cli_rating('literature -100').should == "*****\n"
         cli_rating('literature -100-12-25').should == "*****\n"
       end
