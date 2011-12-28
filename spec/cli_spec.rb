@@ -58,7 +58,7 @@ describe "'oldness' command" do
     context "followed by the name of a medium" do
       it "knows the ranges for literature" do
         result = `./oldness range literature`
-        range = oldness_ranges(Date.new(-1300))
+        range = Oldness::ranges('literature')
         expected_result = "*    : #{range[1]}\n**   : #{range[2]}\n***  : #{range[3]}\n**** : #{range[4]}\n*****: #{range[5]}\n"
         result.should == expected_result
       end
