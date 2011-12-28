@@ -1,4 +1,5 @@
 require 'rspec'
+require_relative '../lib/oldness'
 
 describe "'oldness' command" do
   before :all do
@@ -55,7 +56,12 @@ describe "'oldness' command" do
 
   context "followed by the 'range' sub-command" do
     context "followed by the name of a medium" do
-      it "knows the ranges for literature"
+      it "knows the ranges for literature" do
+        result = `./oldness range literature`
+        range = oldness_ranges(Date.new(-1300))
+        expected_result = "*    : #{range[1]}\n**   : #{range[2]}\n***  : #{range[3]}\n**** : #{range[4]}\n*****: #{range[5]}\n"
+        result.should == expected_result
+      end
       it "knows the ranges for philosophy"
     end
     context "followed by a date" do
@@ -66,6 +72,8 @@ describe "'oldness' command" do
   end
 
   context "first" do
-    it "tells you what it thinks the first instance of a passed medium was"
+    it "tells you about the very first instance of " do
+
+    end
   end
 end
