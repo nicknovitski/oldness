@@ -5,15 +5,14 @@ $LOAD_PATH.unshift(File.expand_path(File.dirname(__FILE__)) + '/../lib/')
 require 'date'
 require 'oldness'
 require 'thor'
-#subcommand =  ARGV[0]
 
 ### parse date object from final argument
-def make_date_from_string(string)
-  date_info = string.split("-")
+def date_from(arg)
+  date_info = arg.split("-")
 
-  if date_info[0] == ''
-    date_info.shift
-    date_info[0] = '-' + date_info[0]
+  if date_info[0].downcase.end_with?('bc')
+    date_info[0][-2..-1] = ""
+    date_info[0].insert(0,'-')
   end
 
   Date.new(*date_info.map {|v| v.to_i})
@@ -38,7 +37,7 @@ class CLI < Thor
 
   desc "rating MEDIUM DATE", "give a star rating of oldness for a work in MEDIUM made on DATE"
   def rating(medium, date)
-    print "*" * oldness_rating(make_date_from_string(date), date_of_first_work(medium)) + "\n"
+    print "*" * oldness_rating(date_from(date), date_of_first_work(medium)) + "\n"
   end
 end
 

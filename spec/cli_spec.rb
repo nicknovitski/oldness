@@ -14,8 +14,8 @@ describe "'oldness' command" do
       it "can rate a work of literature" do
         cli_rating('literature 2001').should == "*\n"
         cli_rating('literature 1889-4-26').should == "***\n"
-        cli_rating('literature -100').should == "*****\n"
-        cli_rating('literature -100-12-25').should == "*****\n"
+        cli_rating('literature 100BC').should == "*****\n"
+        cli_rating('literature 1100bc-12-25').should == "*****\n"
       end
       it "can rate a work of philosophy or religion" do
         cli_rating('philosophy 1700').should == "***\n"
