@@ -48,9 +48,15 @@ describe "'oldness' command" do
       end
     end
     context "followed by a pair of dates" do
-      it "understands the format YYYY"
-      it "understands the format YYYY-MM"
-      it "understands the format YYYY-MM-DD"
+      it "understands the format YYYY" do
+        cli_rating("1300BC 1889").should == "***\n"
+      end
+      it "understands the format YYYY-MM" do
+        cli_rating("1906-4 2000-1").should == "****\n"
+      end
+      it "understands the format YYYY-MM-DD" do
+        cli_rating("1951-5-4 2005-4-1").should == "***\n"
+      end
     end
   end
 

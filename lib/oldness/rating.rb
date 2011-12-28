@@ -22,7 +22,7 @@ module Oldness
       when 'literature' then Date.new(-1300) # Epic of Gilgamesh
       when 'philosophy', 'religion' then Date.new(-800) # The Upanishads
       when 'animation', 'cartoon', 'anime'  then Date.new(1906, 4, 6) #Humorous Phases of Funny Faces
-      else raise Exception
+      else Oldness::date_from(medium) # it's not a medium after all!
     end
   end
 
