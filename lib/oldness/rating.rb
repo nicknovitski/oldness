@@ -18,6 +18,7 @@ module Oldness
       when 'film', 'movie' then Date.new(1894, 2, 5) # Jean Le Roy's "marvellous cinematograph"
       when 'comic', 'manga' then Date.new(1837) # Histoire de M. Vieux Bois
       when 'videogame' then Date.new(1951, 5, 4) # NIMROD
+      when 'sci-fi' then Date.new(1620) # Somnium, by Johannes Kepler
       when 'history' then Date.new(-411) # end of Thucydides' history
       when 'literature' then Date.new(-1300) # Epic of Gilgamesh
       when 'philosophy', 'religion' then Date.new(-800) # The Upanishads

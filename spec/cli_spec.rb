@@ -22,6 +22,9 @@ describe "'oldness' command" do
         cli_rating('philosophy 1700').should == "***\n"
         cli_rating('religion 1911').should == "**\n"
       end
+      it "can rate a work of science fiction" do
+        cli_rating("sci-fi 1965").should == "****\n"
+      end
       it "can rate a novel or book" do
         cli_rating('novel 1900').should == "****\n"
         cli_rating('book 1900').should == "****\n"
@@ -71,9 +74,24 @@ describe "'oldness' command" do
       it "knows the ranges for philosophy"
     end
     context "followed by a date" do
-      it "understands the format YYYY"
-      it "understands the format MM-YYYY"
-      it "understands the format MM-DD-YYYY"
+      it "understands the format YYYY" do
+        result = `./oldness range 1900`
+        range = Oldness::ranges('1900')
+        expected_result = "*    : #{range[1]}\n**   : #{range[2]}\n***  : #{range[3]}\n**** : #{range[4]}\n*****: #{range[5]}\n"
+        result.should == expected_result
+      end
+      it "understands the format YYYY-MM" do
+        result = `./oldness range 1500BC-3`
+        range = Oldness::ranges('1500BC-3')
+        expected_result = "*    : #{range[1]}\n**   : #{range[2]}\n***  : #{range[3]}\n**** : #{range[4]}\n*****: #{range[5]}\n"
+        result.should == expected_result
+      end
+      it "understands the format YYYY-MM-DD" do
+        result = `./oldness range 1986-11-20`
+        range = Oldness::ranges('1986-11-20')
+        expected_result = "*    : #{range[1]}\n**   : #{range[2]}\n***  : #{range[3]}\n**** : #{range[4]}\n*****: #{range[5]}\n"
+        result.should == expected_result
+      end
     end
   end
 
