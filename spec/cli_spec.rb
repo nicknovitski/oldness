@@ -6,7 +6,7 @@ describe "'oldness' command" do
     Dir.chdir("../bin")
   end
 
-  context "followed by the 'rating' sub-command" do
+  describe "'rating' sub-command" do
 
     def cli_rating(string)
       `./oldness rating #{string}`
