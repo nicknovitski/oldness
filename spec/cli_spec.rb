@@ -38,10 +38,10 @@ describe "'oldness' command" do
         cli_rating("manga 1970").should == "****\n"
       end
       it "can rate a videogame" do
-        cli_rating("videogame 2005-4-1").should == "***\n"
+        cli_rating("videogame 2005-4-1").should == "****\n"
       end
       it "can rate a history" do
-        cli_rating("history 1922-4-1").should == "**\n"
+        cli_rating("history 1922-4-1").should == "***\n"
         #non-fiction?  (auto)biography?
       end
       it "can rate a cartoon, animation or anime" do
@@ -58,7 +58,7 @@ describe "'oldness' command" do
         cli_rating("1906-4 2000-1").should == "****\n"
       end
       it "understands the format YYYY-MM-DD" do
-        cli_rating("1951-5-4 2005-4-1").should == "***\n"
+        cli_rating("1951-5-4 2005-4-1").should == "****\n"
       end
     end
   end
@@ -96,8 +96,6 @@ describe "'oldness' command" do
   end
 
   context "first" do
-    it "tells you about the very first instance of " do
-
-    end
+    it "tells you about the very first instance of a given work"
   end
 end
