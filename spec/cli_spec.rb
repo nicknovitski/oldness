@@ -1,12 +1,12 @@
 require 'rspec'
 require_relative '../lib/oldness'
 
-describe "'oldness' command" do
+describe "oldness" do
   before :all do
     Dir.chdir("../bin")
   end
 
-  describe "'rating' sub-command" do
+  describe "rating" do
 
     def cli_rating(string)
       `./oldness rating #{string}`
@@ -16,6 +16,7 @@ describe "'oldness' command" do
         cli_rating('literature 2001').should == "*\n"
         cli_rating('literature 1889-4-26').should == "***\n"
         cli_rating('literature 100BC').should == "*****\n"
+        cli_rating('literature 1100BC').should == "*****\n"
         cli_rating('literature 1100bc-12-25').should == "*****\n"
       end
       it "can rate a work of philosophy or religion" do
@@ -52,22 +53,25 @@ describe "'oldness' command" do
     end
     context "followed by a pair of dates" do
       it "understands the format YYYY" do
+        pending
         cli_rating("1300BC 1889").should == "***\n"
       end
       it "understands the format YYYY-MM" do
+        pending
         cli_rating("1906-4 2000-1").should == "****\n"
       end
       it "understands the format YYYY-MM-DD" do
+        pending
         cli_rating("1951-5-4 2005-4-1").should == "****\n"
       end
     end
   end
 
-  context "followed by the 'range' sub-command" do
+  context "range" do
     context "followed by the name of a medium" do
       it "knows the ranges for literature" do
         result = `./oldness range literature`
-        range = Oldness::ranges('literature')
+        range = Literature.ranges
         expected_result = "*    : #{range[1]}\n**   : #{range[2]}\n***  : #{range[3]}\n**** : #{range[4]}\n*****: #{range[5]}\n"
         result.should == expected_result
       end
@@ -75,18 +79,21 @@ describe "'oldness' command" do
     end
     context "followed by a date" do
       it "understands the format YYYY" do
+        pending
         result = `./oldness range 1900`
         range = Oldness::ranges('1900')
         expected_result = "*    : #{range[1]}\n**   : #{range[2]}\n***  : #{range[3]}\n**** : #{range[4]}\n*****: #{range[5]}\n"
         result.should == expected_result
       end
       it "understands the format YYYY-MM" do
+        pending
         result = `./oldness range 1500BC-3`
         range = Oldness::ranges('1500BC-3')
         expected_result = "*    : #{range[1]}\n**   : #{range[2]}\n***  : #{range[3]}\n**** : #{range[4]}\n*****: #{range[5]}\n"
         result.should == expected_result
       end
       it "understands the format YYYY-MM-DD" do
+        pending
         result = `./oldness range 1986-11-20`
         range = Oldness::ranges('1986-11-20')
         expected_result = "*    : #{range[1]}\n**   : #{range[2]}\n***  : #{range[3]}\n**** : #{range[4]}\n*****: #{range[5]}\n"
