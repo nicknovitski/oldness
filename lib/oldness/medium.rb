@@ -15,9 +15,9 @@ class Medium
   end
 
   def self.starts_from(date)
-    @@start_date = date
+    @start_date = date
   end
   def self.start_date
-    @@start_date
+    @start_date
   end
 end
