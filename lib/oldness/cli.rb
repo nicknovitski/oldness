@@ -27,4 +27,9 @@ class CLI < Thor
     range = get_class(medium).ranges
     print "*    : #{range[1]}\n**   : #{range[2]}\n***  : #{range[3]}\n**** : #{range[4]}\n*****: #{range[5]}\n"
   end
+
+  desc "first MEDIUM", "print the first work in MEDIUM"
+  def first(medium)
+    print "#{get_class(medium).first}\n"
+  end
 end

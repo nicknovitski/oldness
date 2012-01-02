@@ -17,8 +17,7 @@ describe Medium do
   end
   before :all do
     class RubyPrograms < Medium
-      starts_from Date.new(1979)
-      #started_with "Hello World", :by => "Matz"
+      began Date.new(1979), :with=>"Hello World", :by => "Matz"
     end
   end
   describe ".ranges" do
@@ -45,5 +44,12 @@ describe Medium do
       RubyPrograms.rate(Date.new(2010), :when => Date.new(2050)).should == 5
     end
   end
-  describe ".first"
+  describe ".first" do
+    it "returns an with the attributes passed to .began" do
+      RubyPrograms.first.title.should == "Hello World"
+      RubyPrograms.first.by.should == "Matz"
+      RubyPrograms.first.date.should == Date.new(1979)
+      RubyPrograms.first.to_s.should == "Hello World (1979), by Matz"
+    end
+  end
 end

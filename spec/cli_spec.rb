@@ -103,6 +103,12 @@ describe "oldness" do
   end
 
   context "first" do
-    it "tells you about the very first instance of a given work"
+    def first(medium)
+      `./oldness first #{medium}`
+    end
+    it "tells you about the very first instance of a given work" do
+      first('literature').should == "The Epic of Gilgamesh (1300BC)\n"
+      #first('')
+    end
   end
 end
