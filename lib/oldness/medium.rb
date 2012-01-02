@@ -17,11 +17,12 @@ class Medium
   end
 
   def self.starts_from(date)
-    @start_date = date
+    @date = date
+    def self.start_date
+      @date
+    end
   end
-  def self.start_date
-    @start_date
-  end
+
 end
 
 class Literature < Medium # The Epic of Gilgamesh
@@ -31,10 +32,7 @@ end
 class Philosophy < Medium # The Upanishads
   starts_from Date.new(-800)
 end
-
-class Religion < Medium
-  starts_from Date.new(-800)
-end
+Religion = Philosophy # now that's what I call opinionated software
 
 class SciFi < Medium # Somnium, Johannes Kepler
   starts_from Date.new(1620)
@@ -43,26 +41,17 @@ end
 class Novel < Medium # Tale of Genji, Murasaki Shikibu
   starts_from Date.new(1010)
 end
-
-class Book < Medium
-  starts_from Date.new(1010)
-end
+Book = Novel
 
 class Film < Medium # Untitled, Jean Le Roy
   starts_from Date.new(1894, 2, 5)
 end
-
-class Movie < Medium
-  starts_from Date.new(1894, 2, 5)
-end
+Movie = Film
 
 class Comic < Medium # Histoire de M. Vieux Bois, Rodolphe Töpffer
   starts_from Date.new(1837)
 end
-
-class Manga < Medium
-  starts_from Date.new(1837)
-end
+Manga = Comic
 
 class Videogame < Medium
   starts_from Date.new(1951, 5, 4) # NIMROD, Ferranti International plc
@@ -75,13 +64,5 @@ end
 class Animation < Medium # Humorous Phases of Funny Faces, J. Stuart Blackton
   starts_from Date.new(1906, 4, 6)
 end
-
-class Cartoon < Medium
-  starts_from Date.new(1906, 4, 6)
-end
-
-class Anime < Medium
-  starts_from Date.new(1906, 4, 6)
-end
-
-#todo: merge duplicates
+Cartoon = Animation
+Anime = Animation
