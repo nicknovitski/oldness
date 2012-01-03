@@ -1,5 +1,4 @@
-require 'rspec'
-require_relative '../lib/oldness'
+require 'spec_helper'
 
 module Oldness
   describe "oldness" do

@@ -1,6 +1,4 @@
-require 'rspec'
-require_relative '../lib/oldness'
-require 'date'
+require 'spec_helper'
 
 module Oldness
   describe Medium do
