@@ -102,4 +102,8 @@ module Oldness
   Cartoon = Animation
   Anime = Animation
 
+  class Rpg < Medium
+    began Date.new(1974), :with => "Dungeons & Dragons", :by => "Gary Gygax and David Arneson"
+  end
+
 end
