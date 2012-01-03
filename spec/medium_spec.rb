@@ -20,13 +20,17 @@ module Oldness
       class RubyPrograms < Medium
         began Date.new(1979), :with=>"Hello World", :by => "Matz"
       end
+      @ruby_ranges = ranges_for(Date.new(1979))
     end
     describe ".ranges" do
       it "returns a particular kind of hash" do
-        RubyPrograms.ranges.should == ranges_for(Date.new(1979))
+        RubyPrograms.ranges.should == @ruby_ranges
       end
       it "can take an argument for a particular date" do
         RubyPrograms.ranges(:when => Date.new(2009)).should == ranges_for(Date.new(1979), Date.new(2009))
+      end
+      it "can have formatted output instead" do
+        RubyPrograms.ranges(:formatted => true).should == "*****: #{@ruby_ranges[5]}\n**** : #{@ruby_ranges[4]}\n***  : #{@ruby_ranges[3]}\n**   : #{@ruby_ranges[2]}\n*    : #{@ruby_ranges[1]}"
       end
     end
     describe ".rate" do
@@ -43,6 +47,10 @@ module Oldness
       end
       it "can take an argument for a particular date" do
         RubyPrograms.rate(Date.new(2010), :when => Date.new(2050)).should == 5
+      end
+      it "can have formatted output instead" do
+        RubyPrograms.rate(Date.today, :formatted=>true).should == "*"
+        RubyPrograms.rate(Date.new(2010), :when => Date.new(2050), :formatted => true).should == "*****"
       end
     end
     describe ".first" do

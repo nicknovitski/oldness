@@ -26,15 +26,34 @@ module Oldness
       current_date = args[:when] ? args[:when] : Date.today
       span = (current_date-start_date)
       unit = span/81
-      {5 => (start_date..current_date-27*unit),
-       4 => (current_date-27*unit..current_date-9*unit),
-       3 => (current_date-9*unit..current_date-3*unit),
-       2 => (current_date-3*unit..current_date-unit),
-       1 => (current_date-unit..current_date)}
+      ranges = {5 => (start_date..current_date-27*unit),
+                4 => (current_date-27*unit..current_date-9*unit),
+                3 => (current_date-9*unit..current_date-3*unit),
+                2 => (current_date-3*unit..current_date-unit),
+                1 => (current_date-unit..current_date)}
+      if args[:formatted]
+        f_ranges = ""
+        ranges.each do |stars, range|
+          f_ranges += ("*" * stars) + (" " * (5-stars)) + ": #{range}\n"
+        end
+        f_ranges.chomp
+      else
+        ranges
+      end
     end
 
     def self.rate(work_date, args={})
-      ranges(args).find {|key, range| range.cover?(work_date)}[0]
+      work_date = parse_date(work_date) unless work_date.respond_to?(:yday)
+
+      formatted = args[:formatted]
+      args[:formatted] = nil
+      rating = ranges(args).find {|key, range| range.cover?(work_date)}[0]
+
+      if formatted
+        "*" * rating
+      else
+        rating
+      end
     end
 
     def self.began(date, args={})
@@ -45,6 +64,18 @@ module Oldness
       def self.start_date
         self.first.date
       end
+    end
+
+    private
+    def self.parse_date(string)
+      date_info = string.split("-")
+
+      if date_info[0].downcase.end_with?('bc')
+        date_info[0][-2..-1] = ""
+        date_info[0].insert(0,'-')
+      end
+
+      Date.new(*date_info.map {|v| v.to_i})
     end
   end
 
