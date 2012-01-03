@@ -2,7 +2,16 @@ require 'date'
 require 'oldness/work'
 
 module Oldness
-    class Medium
+  def self.media
+    list = []
+    ObjectSpace.each_object(Class) do |c|
+      next unless c.superclass == Medium
+      list << c
+    end
+    list
+  end
+
+  class Medium
     def self.ranges(args={})
       current_date = args[:when] ? args[:when] : Date.today
       span = (current_date-start_date)

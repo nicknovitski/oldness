@@ -19,6 +19,11 @@ module Oldness
       print "#{get_class(medium).first}\n"
     end
 
+    desc "list", "print defined mediums which can be used in other commands"
+    def list
+      print Oldness::media.inject("") { |l, c| l + c.to_s.sub("Oldness::", "")+"\n"}
+    end
+
     no_tasks do
       def get_class(medium)
         eval("Oldness::" + medium.split('-').collect(&:capitalize).inject(:+))
