@@ -1,6 +1,9 @@
+$:.push File.expand_path("../lib", __FILE__)
+require 'oldness/version'
+
 Gem::Specification.new do |s|
   s.name = 'oldness'
-  s.version = '0.0.1'
+  s.version = Oldness::VERSION
   s.platform = Gem::Platform::RUBY
   s.date = '2011-12-20'
   s.authors = ['Nick Novitski']
