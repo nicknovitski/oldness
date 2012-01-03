@@ -52,7 +52,7 @@ module Oldness
       end
     end
     describe ".first" do
-      it "returns an with the attributes passed to .began" do
+      it "returns a Work object with the attributes passed to .began" do
         RubyPrograms.first.title.should == "Hello World"
         RubyPrograms.first.by.should == "Matz"
         RubyPrograms.first.date.should == Date.new(1979)

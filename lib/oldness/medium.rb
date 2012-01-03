@@ -1,27 +1,8 @@
 require 'date'
+require 'oldness/work'
 
 module Oldness
-  class Work
-    attr_accessor :date, :title, :by
-    def initialize(date, args={})
-      @date, @title, @by = date, args[:with], args[:by]
-    end
-    def to_s
-      if date.yday == 1
-        @date = date.year
-        if date < 0
-          @date = (date * -1).to_s + "BC"
-        end
-      end
-      str = "#{title} (#{date})"
-      if by
-        str += ", by #{by}"
-      end
-      str
-    end
-  end
-
-  class Medium
+    class Medium
     def self.ranges(args={})
       current_date = args[:when] ? args[:when] : Date.today
       span = (current_date-start_date)
@@ -57,7 +38,7 @@ module Oldness
     end
 
     def self.began(date, args={})
-      @first = Work.new(date, args)
+      @first = Work.new(date, :title => args[:with], :by => args[:by])
       def self.first
         @first
       end
