@@ -14,9 +14,9 @@ module Oldness
   class Medium
     def self.ranges(args={})
       current_date = args[:when] ? args[:when] : Date.today
-      span = (current_date-start_date)
+      span = (current_date-first.date)
       unit = span/81
-      ranges = {5 => (start_date..current_date-27*unit),
+      ranges = {5 => (first.date..current_date-27*unit),
                 4 => (current_date-27*unit..current_date-9*unit),
                 3 => (current_date-9*unit..current_date-3*unit),
                 2 => (current_date-3*unit..current_date-unit),
@@ -50,9 +50,6 @@ module Oldness
       @first = Work.new(date, :title => args[:with], :by => args[:by])
       def self.first
         @first
-      end
-      def self.start_date
-        self.first.date
       end
     end
 
