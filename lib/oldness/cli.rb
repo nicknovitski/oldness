@@ -19,9 +19,9 @@ module Oldness
       print "#{get_class(medium).first}\n"
     end
 
-    desc "list", "print defined mediums which can be used in other commands"
-    def list
-      print Oldness::media.inject("") { |l, c| l + c.to_s.sub("Oldness::", "")+"\n"}.downcase
+    desc "mediums", "List what mediums can be used in other commands"
+    def mediums
+      print Oldness::media.collect(&:to_s).sort.inject("") { |l, c| l + c.sub("Oldness::", "")+"\n"}.downcase
     end
 
     no_tasks do
