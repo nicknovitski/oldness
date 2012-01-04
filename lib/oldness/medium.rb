@@ -33,7 +33,7 @@ module Oldness
     end
 
     def self.rate(work_date, args={})
-      work_date = parse_date(work_date) unless work_date.respond_to?(:yday)
+      work_date = parse_date(work_date)
 
       formatted = args[:formatted]
       args[:formatted] = nil
@@ -57,8 +57,12 @@ module Oldness
     end
 
     private
-    def self.parse_date(string)
-      date_info = string.split("-")
+    def self.parse_date(date)
+      begin
+        date_info = date.split("-")
+      rescue NoMethodError
+        return date
+      end
 
       if date_info[0].downcase.end_with?('bc')
         date_info[0][-2..-1] = ""
