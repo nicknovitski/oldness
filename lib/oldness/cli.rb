@@ -21,7 +21,7 @@ module Oldness
 
     desc "list", "print defined mediums which can be used in other commands"
     def list
-      print Oldness::media.inject("") { |l, c| l + c.to_s.sub("Oldness::", "")+"\n"}
+      print Oldness::media.inject("") { |l, c| l + c.to_s.sub("Oldness::", "")+"\n"}.downcase
     end
 
     no_tasks do

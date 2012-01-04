@@ -25,7 +25,7 @@ module Oldness
           next unless c.superclass == Medium
           list << c
         end
-        `./oldness list`.should == list.inject("") { |l, c| l + c.to_s.sub("Oldness::", "")+"\n" }
+        `./oldness list`.should == list.inject("") { |l, c| l + c.to_s.downcase.sub("oldness::", "")+"\n" }
       end
     end
   end
