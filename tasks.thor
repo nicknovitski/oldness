@@ -24,23 +24,6 @@ class Gems < Thor
     system "gem install pkg/#{gemspec.name}-#{gemspec.version}"
   end
 
-  desc "github", "Push to Github"
-  def github
-    system "git push origin : --tags"
-  end
-
-  desc "rubygems", "Push to Rubygems"
-  def rubygems
-    invoke :build
-    system "gem push pkg/#{gemspec.name}-#{gemspec.version}.gem"
-  end
-
-  desc "publish", "Push to Github and Rubygems"
-  def publish
-    invoke :github
-    invoke :rubygems
-  end
-
   no_tasks do
     def gemspec
       @gemspec ||= eval(File.read(Dir["*.gemspec"].first))
@@ -84,6 +67,32 @@ class VersionBump < Thor
       path = File.expand_path("./lib/oldness/version.rb")
       new_source = File.read(path).sub(/VERSION\s*=.*/, %Q{VERSION = "#{version.join('.')}"})
       File.open(path, 'w') { |f| f.puts new_source }
+    end
+  end
+end
+
+class Publish < Thor
+  desc "github", "Push changes to github"
+  def github
+    system "git push origin : --tags"
+  end
+  desc "gem", "Build gem and push it to rubygems"
+  def gem
+    confirm = ask "This will push whatever's in the working directory to rubygems. Are you SURE? Y/N"
+    if confirm == "Y"
+      invoke "gems:build"
+      system "gem push pkg/#{gemspec.name}-#{gemspec.version}.gem"
+    end
+  end
+  desc "all", "Push to both github and rubygems"
+  def all
+    invoke :github
+    invoke :gem
+  end
+
+  no_tasks do
+    def gemspec
+      @gemspec ||= eval(File.read(Dir["*.gemspec"].first))
     end
   end
 end
