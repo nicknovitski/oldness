@@ -34,38 +34,32 @@ end
 class VersionBump < Thor
   desc "manual MAJOR MINOR PATCH", "Set version number to 'MAJOR.MINOR.PATCH'"
   def manual(major, minor, patch)
-    version[0], version[1], version[2] = major, minor, patch
-    update_version
+    update_version(major, minor, patch)
   end
 
   desc "major", "Bump by a major version"
   def major
-    version[0] += 1
-    version[1] = 0
-    version[2] = 0
-    update_version
+    invoke :manual, [version[:major] + 1, 0, 0]
   end
   desc "minor", "Bump by a minor version"
   def minor
-    version[1] += 1
-    version[2] = 0
-    update_version
+    invoke :manual, [version[:major], version[:minor] + 1, 0]
   end
   desc "patch", "Bump by a patch version"
   def patch
-    version[2] += 1
-    update_version
+    invoke :manual [version[:major], version[:minor], version[:patch] + 1]
   end
+
   no_tasks do
     def version
       $:.push File.expand_path("../lib", __FILE__)
       require 'oldness/version'
-      Oldness::VERSION =~ /(\d+)\.(\d+)\.(\d+)/
-      @version ||= [$1.to_i, $2.to_i, $3.to_i]
+      @version ||= {:major=>Oldness::Version::MAJOR, :minor=>Oldness::Version::MINOR, :patch=>Oldness::Version::PATCH}
     end
-    def update_version
+    def update_version(major, minor, patch)
       path = File.expand_path("./lib/oldness/version.rb")
-      new_source = File.read(path).sub(/VERSION\s*=.*/, %Q{VERSION = "#{version.join('.')}"})
+      new_source = File.read(path)
+      new_source.sub!(/MAJOR\s*=.*/, %Q{MAJOR = #{major}}).sub!(/MINOR\s*=.*/, %Q{MINOR = #{minor}}).sub!(/PATCH\s*=.*/, %Q{PATCH = #{patch}})
       File.open(path, 'w') { |f| f.puts new_source }
     end
   end
@@ -96,3 +90,4 @@ class Publish < Thor
     end
   end
 end
+
