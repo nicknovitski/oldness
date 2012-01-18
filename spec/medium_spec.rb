@@ -59,5 +59,22 @@ module Oldness
         RubyPrograms.first.to_s.should == "Hello World (1979), by Matz"
       end
     end
+    describe ".list" do
+      def all_media
+        classes = []
+        ObjectSpace.each_object(Class) do |c|
+          next unless c.superclass == Medium
+          classes << c
+        end
+        classes
+      end
+      it "returns all the objects which inherit from Media" do
+        all_media.each { |i| Medium.list.should include(i) }
+        Medium.list.each { |i| all_media.should include(i) }
+      end
+      it "can have formatted output instead" do
+        Medium.list(:formatted => true).should == Medium.list.collect(&:to_s).sort.inject("") { |l, c| l + c.downcase.sub("oldness::", "")+"\n" }
+      end
+    end
   end
 end

@@ -36,15 +36,9 @@ module Oldness
     end
 
     describe "media" do
-      it "lists all subclasses of Medium in the object space" do
-        list = []
-        ObjectSpace.each_object(Class) do |c|
-          next unless c.superclass == Medium
-          list << c
-        end
-
-        cli.invoke(:media)
-        @io.string.should == list.collect(&:to_s).sort.inject("") { |l, c| l + c.downcase.sub("oldness::", "")+"\n" }
+      it "calls the list method of Medium with :formatted => true" do
+        cli.media
+        @io.string.should == Medium.list(:formatted => true)
       end
     end
   end

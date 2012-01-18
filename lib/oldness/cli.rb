@@ -23,7 +23,7 @@ module Oldness
 
     desc "media", "List what mediums can be used in other commands"
     def media
-      print Oldness::media.collect(&:to_s).sort.inject("") { |l, c| l + c.sub("Oldness::", "")+"\n"}.downcase
+      print "#{Medium.list(:formatted=>true)}"
     end
     map "mediums" => "media"
     map "list" => "media"
