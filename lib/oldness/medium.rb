@@ -120,4 +120,8 @@ module Oldness
     began Date.new(1974), :with => "Dungeons & Dragons", :by => "Gary Gygax and David Arneson"
   end
 
+  class Boardgame < Medium
+    began Date.new(-3500), :with => "Senet"
+  end
+
 end
