@@ -31,7 +31,7 @@ Oldness is a library and shell command that places the age of a published work o
      ***  : 1998-11-27..2007-08-22
      **   : 2007-08-22..2010-07-21
      *    : 2010-07-21..2012-01-04
-     $ oldness first philosophy
+     $ oldness first novel
      Tale of Genji (1010), by Murasaki Shikibu
 
 ### Library
