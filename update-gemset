@@ -1,0 +1,9 @@
+#! /usr/bin/env nix-shell
+#! nix-shell -p bundler bundix -i bash
+
+cd "${BASH_SOURCE%/*}"
+
+bundle lock --update
+bundix
+
+# vim: ft=sh
