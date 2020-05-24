@@ -103,7 +103,7 @@ module Oldness
   Manga = Comic
 
   class Videogame < Medium
-    began Date.new(1951, 5, 4), :with => "Nimrod", :by => "Ferranti International plc"
+    began Date.new(1952, 7, 1), :with => "Draughts", :by => "Christopher Strachey"
   end
 
   class History < Medium
